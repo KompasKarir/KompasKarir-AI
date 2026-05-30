@@ -1,0 +1,10 @@
+{
+  "model_label": "Base",
+  "train_acc": 97.17,
+  "val_acc": 92.11,
+  "test_acc": 92.76,
+  "top3_train": 100.0,
+  "top3_test": 100.0,
+  "mae_sharpened": 0.0208,
+  "temperature": 0.01
+}

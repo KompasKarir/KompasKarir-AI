@@ -1,0 +1,562 @@
+{
+  "Administrasi Pendidikan": {
+    "riasec_r_raw_scaled": 32.55597014925373,
+    "riasec_i_raw_scaled": 46.952736318407965,
+    "riasec_a_raw_scaled": 42.63059701492537,
+    "riasec_s_raw_scaled": 66.9776119402985,
+    "riasec_e_raw_scaled": 56.21890547263681,
+    "riasec_c_raw_scaled": 62.84203980099503
+  },
+  "Agrobisnis": {
+    "riasec_r_raw_scaled": 61.964285714285715,
+    "riasec_i_raw_scaled": 52.113095238095234,
+    "riasec_a_raw_scaled": 33.00595238095238,
+    "riasec_s_raw_scaled": 48.45238095238095,
+    "riasec_e_raw_scaled": 62.88690476190476,
+    "riasec_c_raw_scaled": 56.39880952380952
+  },
+  "Agroteknologi": {
+    "riasec_r_raw_scaled": 67.2403381642512,
+    "riasec_i_raw_scaled": 67.57246376811594,
+    "riasec_a_raw_scaled": 28.04951690821256,
+    "riasec_s_raw_scaled": 42.874396135265705,
+    "riasec_e_raw_scaled": 48.067632850241544,
+    "riasec_c_raw_scaled": 52.68719806763285
+  },
+  "Akuntansi": {
+    "riasec_r_raw_scaled": 33.116883116883116,
+    "riasec_i_raw_scaled": 52.624458874458874,
+    "riasec_a_raw_scaled": 22.42965367965368,
+    "riasec_s_raw_scaled": 38.392857142857146,
+    "riasec_e_raw_scaled": 63.14935064935065,
+    "riasec_c_raw_scaled": 77.21861471861472
+  },
+  "Animasi": {
+    "riasec_r_raw_scaled": 27.84722222222222,
+    "riasec_i_raw_scaled": 42.604166666666664,
+    "riasec_a_raw_scaled": 77.08333333333333,
+    "riasec_s_raw_scaled": 47.604166666666664,
+    "riasec_e_raw_scaled": 56.875,
+    "riasec_c_raw_scaled": 39.479166666666664
+  },
+  "Bahasa Dan Sastra Inggris": {
+    "riasec_r_raw_scaled": 21.805555555555557,
+    "riasec_i_raw_scaled": 42.80555555555555,
+    "riasec_a_raw_scaled": 52.361111111111114,
+    "riasec_s_raw_scaled": 72.1111111111111,
+    "riasec_e_raw_scaled": 47.47222222222222,
+    "riasec_c_raw_scaled": 53.583333333333336
+  },
+  "Desain Komunikasi Visual": {
+    "riasec_r_raw_scaled": 28.5,
+    "riasec_i_raw_scaled": 38.25,
+    "riasec_a_raw_scaled": 70.8611111111111,
+    "riasec_s_raw_scaled": 41.77777777777778,
+    "riasec_e_raw_scaled": 55.86111111111111,
+    "riasec_c_raw_scaled": 32.611111111111114
+  },
+  "Ekonomi Pembangunan": {
+    "riasec_r_raw_scaled": 38.373655913978496,
+    "riasec_i_raw_scaled": 62.27598566308244,
+    "riasec_a_raw_scaled": 32.81810035842294,
+    "riasec_s_raw_scaled": 46.93100358422939,
+    "riasec_e_raw_scaled": 66.91308243727599,
+    "riasec_c_raw_scaled": 67.38351254480287
+  },
+  "Geografi": {
+    "riasec_r_raw_scaled": 56.8204365079365,
+    "riasec_i_raw_scaled": 66.71626984126985,
+    "riasec_a_raw_scaled": 43.601190476190474,
+    "riasec_s_raw_scaled": 51.83531746031746,
+    "riasec_e_raw_scaled": 42.21230158730159,
+    "riasec_c_raw_scaled": 48.586309523809526
+  },
+  "Ilmu Administrasi Negara": {
+    "riasec_r_raw_scaled": 35.92261904761905,
+    "riasec_i_raw_scaled": 52.5297619047619,
+    "riasec_a_raw_scaled": 32.916666666666664,
+    "riasec_s_raw_scaled": 61.75595238095239,
+    "riasec_e_raw_scaled": 68.86904761904762,
+    "riasec_c_raw_scaled": 71.30952380952381
+  },
+  "Ilmu Hukum": {
+    "riasec_r_raw_scaled": 37.97043010752688,
+    "riasec_i_raw_scaled": 58.87096774193548,
+    "riasec_a_raw_scaled": 33.232526881720425,
+    "riasec_s_raw_scaled": 58.299731182795696,
+    "riasec_e_raw_scaled": 67.03629032258064,
+    "riasec_c_raw_scaled": 71.50537634408602
+  },
+  "Ilmu Komunikasi": {
+    "riasec_r_raw_scaled": 28.078358208955223,
+    "riasec_i_raw_scaled": 46.797263681592035,
+    "riasec_a_raw_scaled": 57.36940298507463,
+    "riasec_s_raw_scaled": 71.23756218905473,
+    "riasec_e_raw_scaled": 66.10696517412936,
+    "riasec_c_raw_scaled": 52.7363184079602
+  },
+  "Informatika": {
+    "riasec_r_raw_scaled": 28.83638211382114,
+    "riasec_i_raw_scaled": 77.15955284552845,
+    "riasec_a_raw_scaled": 23.628048780487806,
+    "riasec_s_raw_scaled": 32.545731707317074,
+    "riasec_e_raw_scaled": 47.332317073170735,
+    "riasec_c_raw_scaled": 56.63109756097561
+  },
+  "Keperawatan": {
+    "riasec_r_raw_scaled": 35.809178743961354,
+    "riasec_i_raw_scaled": 61.6243961352657,
+    "riasec_a_raw_scaled": 41.06280193236715,
+    "riasec_s_raw_scaled": 72.70531400966183,
+    "riasec_e_raw_scaled": 52.6268115942029,
+    "riasec_c_raw_scaled": 66.93840579710145
+  },
+  "Manajemen": {
+    "riasec_r_raw_scaled": 37.92270531400966,
+    "riasec_i_raw_scaled": 48.369565217391305,
+    "riasec_a_raw_scaled": 35.960144927536234,
+    "riasec_s_raw_scaled": 57.729468599033815,
+    "riasec_e_raw_scaled": 72.64492753623189,
+    "riasec_c_raw_scaled": 63.19444444444445
+  },
+  "Manajemen Pajak": {
+    "riasec_r_raw_scaled": 32.291666666666664,
+    "riasec_i_raw_scaled": 56.857638888888886,
+    "riasec_a_raw_scaled": 28.53009259259259,
+    "riasec_s_raw_scaled": 43.605324074074076,
+    "riasec_e_raw_scaled": 61.979166666666664,
+    "riasec_c_raw_scaled": 71.84606481481482
+  },
+  "Manajemen Perdagangan": {
+    "riasec_r_raw_scaled": 36.77662037037037,
+    "riasec_i_raw_scaled": 52.083333333333336,
+    "riasec_a_raw_scaled": 37.52893518518519,
+    "riasec_s_raw_scaled": 57.37847222222222,
+    "riasec_e_raw_scaled": 72.01967592592592,
+    "riasec_c_raw_scaled": 62.094907407407405
+  },
+  "Manajemen Perhotelan": {
+    "riasec_r_raw_scaled": 38.125,
+    "riasec_i_raw_scaled": 46.51041666666667,
+    "riasec_a_raw_scaled": 47.03125,
+    "riasec_s_raw_scaled": 72.578125,
+    "riasec_e_raw_scaled": 71.35416666666666,
+    "riasec_c_raw_scaled": 58.072916666666664
+  },
+  "Pariwisata": {
+    "riasec_r_raw_scaled": 41.51041666666667,
+    "riasec_i_raw_scaled": 47.8125,
+    "riasec_a_raw_scaled": 52.552083333333336,
+    "riasec_s_raw_scaled": 66.171875,
+    "riasec_e_raw_scaled": 66.43229166666666,
+    "riasec_c_raw_scaled": 53.151041666666664
+  },
+  "Pendidikan Agama Islam": {
+    "riasec_r_raw_scaled": 32.111111111111114,
+    "riasec_i_raw_scaled": 46.916666666666664,
+    "riasec_a_raw_scaled": 43.52777777777778,
+    "riasec_s_raw_scaled": 72.41666666666667,
+    "riasec_e_raw_scaled": 52.69444444444444,
+    "riasec_c_raw_scaled": 61.36111111111111
+  },
+  "Pendidikan Bahasa Dan Sastra Indonesia": {
+    "riasec_r_raw_scaled": 24.2816091954023,
+    "riasec_i_raw_scaled": 42.76819923371648,
+    "riasec_a_raw_scaled": 51.65229885057471,
+    "riasec_s_raw_scaled": 72.07854406130268,
+    "riasec_e_raw_scaled": 46.86302681992338,
+    "riasec_c_raw_scaled": 58.069923371647505
+  },
+  "Pendidikan Bahasa Indonesia": {
+    "riasec_r_raw_scaled": 23.801369863013697,
+    "riasec_i_raw_scaled": 43.407534246575345,
+    "riasec_a_raw_scaled": 52.28310502283105,
+    "riasec_s_raw_scaled": 71.00456621004565,
+    "riasec_e_raw_scaled": 46.86073059360731,
+    "riasec_c_raw_scaled": 57.27739726027397
+  },
+  "Pendidikan Bahasa Inggris": {
+    "riasec_r_raw_scaled": 23.242971887550198,
+    "riasec_i_raw_scaled": 42.670682730923694,
+    "riasec_a_raw_scaled": 51.95783132530121,
+    "riasec_s_raw_scaled": 71.5863453815261,
+    "riasec_e_raw_scaled": 47.31425702811245,
+    "riasec_c_raw_scaled": 56.074297188755025
+  },
+  "Pendidikan Bahasa Jepang": {
+    "riasec_r_raw_scaled": 24.813988095238095,
+    "riasec_i_raw_scaled": 47.098214285714285,
+    "riasec_a_raw_scaled": 52.00892857142857,
+    "riasec_s_raw_scaled": 70.34970238095238,
+    "riasec_e_raw_scaled": 47.35863095238095,
+    "riasec_c_raw_scaled": 57.254464285714285
+  },
+  "Pendidikan Biologi": {
+    "riasec_r_raw_scaled": 37.399193548387096,
+    "riasec_i_raw_scaled": 71.23655913978494,
+    "riasec_a_raw_scaled": 36.59274193548387,
+    "riasec_s_raw_scaled": 52.41935483870968,
+    "riasec_e_raw_scaled": 33.90456989247312,
+    "riasec_c_raw_scaled": 56.72043010752688
+  },
+  "Pendidikan Ekonomi": {
+    "riasec_r_raw_scaled": 37.410714285714285,
+    "riasec_i_raw_scaled": 57.232142857142854,
+    "riasec_a_raw_scaled": 37.94642857142857,
+    "riasec_s_raw_scaled": 57.470238095238095,
+    "riasec_e_raw_scaled": 66.63690476190476,
+    "riasec_c_raw_scaled": 67.70833333333333
+  },
+  "Pendidikan Fisika": {
+    "riasec_r_raw_scaled": 48.25581395348837,
+    "riasec_i_raw_scaled": 75.5813953488372,
+    "riasec_a_raw_scaled": 27.51937984496124,
+    "riasec_s_raw_scaled": 28.14922480620155,
+    "riasec_e_raw_scaled": 33.43023255813954,
+    "riasec_c_raw_scaled": 52.47093023255814
+  },
+  "Pendidikan Geografi": {
+    "riasec_r_raw_scaled": 56.6025641025641,
+    "riasec_i_raw_scaled": 67.27564102564104,
+    "riasec_a_raw_scaled": 42.08333333333333,
+    "riasec_s_raw_scaled": 57.21153846153846,
+    "riasec_e_raw_scaled": 42.27564102564102,
+    "riasec_c_raw_scaled": 54.23076923076923
+  },
+  "Pendidikan Guru Pendidikan Anak Usia Dini": {
+    "riasec_r_raw_scaled": 27.513227513227513,
+    "riasec_i_raw_scaled": 42.3941798941799,
+    "riasec_a_raw_scaled": 48.14814814814815,
+    "riasec_s_raw_scaled": 71.52777777777777,
+    "riasec_e_raw_scaled": 58.597883597883595,
+    "riasec_c_raw_scaled": 63.029100529100525
+  },
+  "Pendidikan Guru Sekolah Dasar": {
+    "riasec_r_raw_scaled": 27.786458333333332,
+    "riasec_i_raw_scaled": 41.69270833333333,
+    "riasec_a_raw_scaled": 48.22916666666667,
+    "riasec_s_raw_scaled": 72.13541666666666,
+    "riasec_e_raw_scaled": 56.276041666666664,
+    "riasec_c_raw_scaled": 62.03125
+  },
+  "Pendidikan Ilmu Pengetahuan Alam": {
+    "riasec_r_raw_scaled": 37.53019323671498,
+    "riasec_i_raw_scaled": 70.95410628019323,
+    "riasec_a_raw_scaled": 37.80193236714976,
+    "riasec_s_raw_scaled": 51.96256038647343,
+    "riasec_e_raw_scaled": 33.54468599033816,
+    "riasec_c_raw_scaled": 57.03502415458937
+  },
+  "Pendidikan Ilmu Pengetahuan Sosial": {
+    "riasec_r_raw_scaled": 32.32142857142857,
+    "riasec_i_raw_scaled": 51.517857142857146,
+    "riasec_a_raw_scaled": 42.916666666666664,
+    "riasec_s_raw_scaled": 66.57738095238096,
+    "riasec_e_raw_scaled": 52.886904761904766,
+    "riasec_c_raw_scaled": 62.94642857142857
+  },
+  "Pendidikan Keagamaan Islam": {
+    "riasec_r_raw_scaled": 31.886574074074076,
+    "riasec_i_raw_scaled": 47.30902777777778,
+    "riasec_a_raw_scaled": 42.73726851851852,
+    "riasec_s_raw_scaled": 71.96180555555556,
+    "riasec_e_raw_scaled": 51.21527777777778,
+    "riasec_c_raw_scaled": 62.03703703703704
+  },
+  "Pendidikan Kimia": {
+    "riasec_r_raw_scaled": 42.29417670682731,
+    "riasec_i_raw_scaled": 72.69076305220884,
+    "riasec_a_raw_scaled": 32.756024096385545,
+    "riasec_s_raw_scaled": 37.299196787148595,
+    "riasec_e_raw_scaled": 38.05220883534137,
+    "riasec_c_raw_scaled": 57.58032128514056
+  },
+  "Pendidikan Luar Biasa": {
+    "riasec_r_raw_scaled": 27.941176470588236,
+    "riasec_i_raw_scaled": 48.4375,
+    "riasec_a_raw_scaled": 47.48774509803921,
+    "riasec_s_raw_scaled": 76.28676470588235,
+    "riasec_e_raw_scaled": 62.74509803921569,
+    "riasec_c_raw_scaled": 62.530637254901954
+  },
+  "Pendidikan Matematika": {
+    "riasec_r_raw_scaled": 39.83477011494253,
+    "riasec_i_raw_scaled": 75.75431034482759,
+    "riasec_a_raw_scaled": 23.38362068965517,
+    "riasec_s_raw_scaled": 28.376436781609193,
+    "riasec_e_raw_scaled": 31.896551724137932,
+    "riasec_c_raw_scaled": 63.18247126436782
+  },
+  "Pendidikan Musik": {
+    "riasec_r_raw_scaled": 28.47222222222222,
+    "riasec_i_raw_scaled": 39.35185185185185,
+    "riasec_a_raw_scaled": 71.66005291005291,
+    "riasec_s_raw_scaled": 61.77248677248677,
+    "riasec_e_raw_scaled": 62.136243386243386,
+    "riasec_c_raw_scaled": 38.59126984126984
+  },
+  "Pendidikan Non Formal": {
+    "riasec_r_raw_scaled": 32.02457264957265,
+    "riasec_i_raw_scaled": 51.12179487179487,
+    "riasec_a_raw_scaled": 47.56944444444444,
+    "riasec_s_raw_scaled": 65.97222222222221,
+    "riasec_e_raw_scaled": 62.3931623931624,
+    "riasec_c_raw_scaled": 57.9594017094017
+  },
+  "Pendidikan Pancasila Dan Kewarganegaraan": {
+    "riasec_r_raw_scaled": 33.70949074074074,
+    "riasec_i_raw_scaled": 51.736111111111114,
+    "riasec_a_raw_scaled": 41.72453703703704,
+    "riasec_s_raw_scaled": 73.4375,
+    "riasec_e_raw_scaled": 57.552083333333336,
+    "riasec_c_raw_scaled": 67.07175925925927
+  },
+  "Pendidikan Sejarah": {
+    "riasec_r_raw_scaled": 26.666666666666668,
+    "riasec_i_raw_scaled": 50.625,
+    "riasec_a_raw_scaled": 42.82738095238095,
+    "riasec_s_raw_scaled": 67.88690476190476,
+    "riasec_e_raw_scaled": 51.69642857142857,
+    "riasec_c_raw_scaled": 61.75595238095239
+  },
+  "Pendidikan Seni Drama Tari Dan Musik": {
+    "riasec_r_raw_scaled": 27.454337899543376,
+    "riasec_i_raw_scaled": 37.214611872146115,
+    "riasec_a_raw_scaled": 71.68949771689498,
+    "riasec_s_raw_scaled": 61.386986301369866,
+    "riasec_e_raw_scaled": 63.470319634703195,
+    "riasec_c_raw_scaled": 37.52853881278539
+  },
+  "Pendidikan Seni Rupa": {
+    "riasec_r_raw_scaled": 28.688524590163933,
+    "riasec_i_raw_scaled": 38.69535519125683,
+    "riasec_a_raw_scaled": 76.26366120218579,
+    "riasec_s_raw_scaled": 58.19672131147541,
+    "riasec_e_raw_scaled": 55.635245901639344,
+    "riasec_c_raw_scaled": 38.55874316939891
+  },
+  "Pendidikan Sosiologi": {
+    "riasec_r_raw_scaled": 27.403846153846153,
+    "riasec_i_raw_scaled": 57.50534188034188,
+    "riasec_a_raw_scaled": 47.78311965811966,
+    "riasec_s_raw_scaled": 72.40918803418803,
+    "riasec_e_raw_scaled": 58.11965811965812,
+    "riasec_c_raw_scaled": 58.30662393162394
+  },
+  "Pendidikan Tari": {
+    "riasec_r_raw_scaled": 28.16176470588235,
+    "riasec_i_raw_scaled": 37.52450980392157,
+    "riasec_a_raw_scaled": 71.83823529411765,
+    "riasec_s_raw_scaled": 62.5,
+    "riasec_e_raw_scaled": 62.696078431372555,
+    "riasec_c_raw_scaled": 38.529411764705884
+  },
+  "Pendidikan Tata Rias Dan Kecantikan": {
+    "riasec_r_raw_scaled": 37.62437810945274,
+    "riasec_i_raw_scaled": 37.06467661691543,
+    "riasec_a_raw_scaled": 66.72885572139303,
+    "riasec_s_raw_scaled": 62.6865671641791,
+    "riasec_e_raw_scaled": 62.3134328358209,
+    "riasec_c_raw_scaled": 47.885572139303484
+  },
+  "Pendidikan Teknik Bangunan": {
+    "riasec_r_raw_scaled": 66.14583333333333,
+    "riasec_i_raw_scaled": 63.25231481481482,
+    "riasec_a_raw_scaled": 37.96296296296296,
+    "riasec_s_raw_scaled": 28.385416666666668,
+    "riasec_e_raw_scaled": 47.366898148148145,
+    "riasec_c_raw_scaled": 52.22800925925926
+  },
+  "Pendidikan Teknik Elektro": {
+    "riasec_r_raw_scaled": 61.93910256410256,
+    "riasec_i_raw_scaled": 72.11538461538461,
+    "riasec_a_raw_scaled": 18.830128205128204,
+    "riasec_s_raw_scaled": 23.424145299145298,
+    "riasec_e_raw_scaled": 42.49465811965812,
+    "riasec_c_raw_scaled": 52.72435897435897
+  },
+  "Pendidikan Teknik Elektronika": {
+    "riasec_r_raw_scaled": 60.812236286919834,
+    "riasec_i_raw_scaled": 70.14767932489453,
+    "riasec_a_raw_scaled": 19.19831223628692,
+    "riasec_s_raw_scaled": 23.338607594936708,
+    "riasec_e_raw_scaled": 42.93248945147679,
+    "riasec_c_raw_scaled": 52.34704641350211
+  },
+  "Pendidikan Teknik Informatika": {
+    "riasec_r_raw_scaled": 27.194444444444443,
+    "riasec_i_raw_scaled": 76.69444444444444,
+    "riasec_a_raw_scaled": 23.833333333333332,
+    "riasec_s_raw_scaled": 33.638888888888886,
+    "riasec_e_raw_scaled": 47.52777777777778,
+    "riasec_c_raw_scaled": 58.0
+  },
+  "Pendidikan Teknik Mesin": {
+    "riasec_r_raw_scaled": 71.93877551020408,
+    "riasec_i_raw_scaled": 62.94642857142857,
+    "riasec_a_raw_scaled": 19.047619047619047,
+    "riasec_s_raw_scaled": 23.681972789115644,
+    "riasec_e_raw_scaled": 42.708333333333336,
+    "riasec_c_raw_scaled": 52.16836734693877
+  },
+  "Pendidikan Vokasional Desain Fashion": {
+    "riasec_r_raw_scaled": 32.89319248826291,
+    "riasec_i_raw_scaled": 42.78169014084507,
+    "riasec_a_raw_scaled": 71.77230046948357,
+    "riasec_s_raw_scaled": 57.247652582159624,
+    "riasec_e_raw_scaled": 62.059859154929576,
+    "riasec_c_raw_scaled": 43.221830985915496
+  },
+  "Pendidikan Vokasional Seni Kuliner": {
+    "riasec_r_raw_scaled": 37.09577114427861,
+    "riasec_i_raw_scaled": 37.593283582089555,
+    "riasec_a_raw_scaled": 66.44900497512437,
+    "riasec_s_raw_scaled": 62.53109452736318,
+    "riasec_e_raw_scaled": 67.7860696517413,
+    "riasec_c_raw_scaled": 46.952736318407965
+  },
+  "Penginderaan Jauh Dan Sistem Informasi Geografis": {
+    "riasec_r_raw_scaled": 56.53153153153153,
+    "riasec_i_raw_scaled": 71.53716216216216,
+    "riasec_a_raw_scaled": 38.37274774774775,
+    "riasec_s_raw_scaled": 45.74887387387387,
+    "riasec_e_raw_scaled": 46.734234234234236,
+    "riasec_c_raw_scaled": 56.953828828828826
+  },
+  "Perpustakaan Dan Ilmu Informasi": {
+    "riasec_r_raw_scaled": 31.849747474747478,
+    "riasec_i_raw_scaled": 58.01767676767677,
+    "riasec_a_raw_scaled": 37.40530303030303,
+    "riasec_s_raw_scaled": 52.714646464646464,
+    "riasec_e_raw_scaled": 51.98863636363637,
+    "riasec_c_raw_scaled": 72.79040404040404
+  },
+  "Psikologi": {
+    "riasec_r_raw_scaled": 27.777777777777775,
+    "riasec_i_raw_scaled": 56.81089743589744,
+    "riasec_a_raw_scaled": 46.9284188034188,
+    "riasec_s_raw_scaled": 70.94017094017093,
+    "riasec_e_raw_scaled": 57.47863247863248,
+    "riasec_c_raw_scaled": 47.08867521367521
+  },
+  "Sastra Indonesia": {
+    "riasec_r_raw_scaled": 23.728813559322035,
+    "riasec_i_raw_scaled": 42.79661016949152,
+    "riasec_a_raw_scaled": 51.9774011299435,
+    "riasec_s_raw_scaled": 72.2457627118644,
+    "riasec_e_raw_scaled": 46.89265536723163,
+    "riasec_c_raw_scaled": 57.6271186440678
+  },
+  "Sastra Inggris": {
+    "riasec_r_raw_scaled": 22.62323943661972,
+    "riasec_i_raw_scaled": 42.34154929577465,
+    "riasec_a_raw_scaled": 51.73122065727699,
+    "riasec_s_raw_scaled": 71.36150234741784,
+    "riasec_e_raw_scaled": 47.828638497652584,
+    "riasec_c_raw_scaled": 57.394366197183096
+  },
+  "Statistika": {
+    "riasec_r_raw_scaled": 38.83101851851852,
+    "riasec_i_raw_scaled": 76.07060185185185,
+    "riasec_a_raw_scaled": 28.616898148148145,
+    "riasec_s_raw_scaled": 36.63194444444444,
+    "riasec_e_raw_scaled": 38.4837962962963,
+    "riasec_c_raw_scaled": 61.95023148148149
+  },
+  "Teknik Elektro": {
+    "riasec_r_raw_scaled": 61.71875,
+    "riasec_i_raw_scaled": 73.359375,
+    "riasec_a_raw_scaled": 18.776041666666664,
+    "riasec_s_raw_scaled": 23.333333333333336,
+    "riasec_e_raw_scaled": 42.34375,
+    "riasec_c_raw_scaled": 53.098958333333336
+  },
+  "Teknik Elektro Industri": {
+    "riasec_r_raw_scaled": 62.5,
+    "riasec_i_raw_scaled": 71.84139784946237,
+    "riasec_a_raw_scaled": 18.884408602150536,
+    "riasec_s_raw_scaled": 24.059139784946233,
+    "riasec_e_raw_scaled": 42.70833333333333,
+    "riasec_c_raw_scaled": 53.09139784946236
+  },
+  "Teknik Elektronika": {
+    "riasec_r_raw_scaled": 62.088815789473685,
+    "riasec_i_raw_scaled": 71.16228070175438,
+    "riasec_a_raw_scaled": 18.777412280701753,
+    "riasec_s_raw_scaled": 23.793859649122805,
+    "riasec_e_raw_scaled": 42.68092105263158,
+    "riasec_c_raw_scaled": 52.4671052631579
+  },
+  "Teknik Geologi": {
+    "riasec_r_raw_scaled": 61.2202380952381,
+    "riasec_i_raw_scaled": 71.78571428571429,
+    "riasec_a_raw_scaled": 27.619047619047617,
+    "riasec_s_raw_scaled": 42.38095238095238,
+    "riasec_e_raw_scaled": 42.232142857142854,
+    "riasec_c_raw_scaled": 52.410714285714285
+  },
+  "Teknik Listrik": {
+    "riasec_r_raw_scaled": 61.92129629629629,
+    "riasec_i_raw_scaled": 72.36689814814815,
+    "riasec_a_raw_scaled": 18.489583333333332,
+    "riasec_s_raw_scaled": 24.65277777777778,
+    "riasec_e_raw_scaled": 42.65046296296296,
+    "riasec_c_raw_scaled": 53.15393518518518
+  },
+  "Teknik Mesin": {
+    "riasec_r_raw_scaled": 70.93881856540085,
+    "riasec_i_raw_scaled": 62.47362869198312,
+    "riasec_a_raw_scaled": 19.462025316455698,
+    "riasec_s_raw_scaled": 23.839662447257382,
+    "riasec_e_raw_scaled": 41.11286919831223,
+    "riasec_c_raw_scaled": 53.19092827004219
+  },
+  "Teknik Otomotif": {
+    "riasec_r_raw_scaled": 70.86148648648648,
+    "riasec_i_raw_scaled": 62.10585585585585,
+    "riasec_a_raw_scaled": 19.1722972972973,
+    "riasec_s_raw_scaled": 22.69144144144144,
+    "riasec_e_raw_scaled": 42.11711711711712,
+    "riasec_c_raw_scaled": 53.181306306306304
+  },
+  "Teknik Pertambangan": {
+    "riasec_r_raw_scaled": 61.940298507462686,
+    "riasec_i_raw_scaled": 71.14427860696517,
+    "riasec_a_raw_scaled": 28.14054726368159,
+    "riasec_s_raw_scaled": 37.810945273631845,
+    "riasec_e_raw_scaled": 42.53731343283582,
+    "riasec_c_raw_scaled": 51.958955223880594
+  },
+  "Teknik Sipil": {
+    "riasec_r_raw_scaled": 66.6025641025641,
+    "riasec_i_raw_scaled": 63.333333333333336,
+    "riasec_a_raw_scaled": 23.49358974358974,
+    "riasec_s_raw_scaled": 28.42948717948718,
+    "riasec_e_raw_scaled": 42.532051282051285,
+    "riasec_c_raw_scaled": 52.59615384615385
+  },
+  "Teknik Sipil Bangunan Gedung": {
+    "riasec_r_raw_scaled": 66.57738095238096,
+    "riasec_i_raw_scaled": 62.827380952380956,
+    "riasec_a_raw_scaled": 24.017857142857142,
+    "riasec_s_raw_scaled": 28.779761904761905,
+    "riasec_e_raw_scaled": 42.738095238095234,
+    "riasec_c_raw_scaled": 51.339285714285715
+  },
+  "Teknologi Kosmetik": {
+    "riasec_r_raw_scaled": 42.651515151515156,
+    "riasec_i_raw_scaled": 63.52272727272727,
+    "riasec_a_raw_scaled": 63.82575757575757,
+    "riasec_s_raw_scaled": 57.15909090909091,
+    "riasec_e_raw_scaled": 59.166666666666664,
+    "riasec_c_raw_scaled": 57.57575757575757
+  },
+  "Teknologi Rekayasa Sistem Elektronika": {
+    "riasec_r_raw_scaled": 62.71929824561404,
+    "riasec_i_raw_scaled": 70.64144736842105,
+    "riasec_a_raw_scaled": 18.887061403508774,
+    "riasec_s_raw_scaled": 23.848684210526315,
+    "riasec_e_raw_scaled": 42.598684210526315,
+    "riasec_c_raw_scaled": 52.02850877192982
+  }
+}

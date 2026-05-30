@@ -1,0 +1,492 @@
+{
+  "Administrasi Pendidikan": {
+    "academic_logika": 75.6134328358209,
+    "academic_bahasa": 80.48059701492537,
+    "academic_sains": 77.32537313432836,
+    "academic_sosial": 84.0320895522388,
+    "academic_praktik": 75.02761194029851
+  },
+  "Agrobisnis": {
+    "academic_logika": 76.33107142857143,
+    "academic_bahasa": 76.35928571428572,
+    "academic_sains": 75.55714285714286,
+    "academic_sosial": 76.11428571428571,
+    "academic_praktik": 74.71714285714286
+  },
+  "Agroteknologi": {
+    "academic_logika": 84.65652173913044,
+    "academic_bahasa": 77.38260869565217,
+    "academic_sains": 85.79710144927536,
+    "academic_sosial": 76.17101449275363,
+    "academic_praktik": 74.66304347826087
+  },
+  "Akuntansi": {
+    "academic_logika": 81.73896103896104,
+    "academic_bahasa": 76.1987012987013,
+    "academic_sains": 76.03376623376624,
+    "academic_sosial": 80.57012987012986,
+    "academic_praktik": 74.87987012987013
+  },
+  "Animasi": {
+    "academic_logika": 76.75333333333333,
+    "academic_bahasa": 79.44833333333332,
+    "academic_sains": 76.49,
+    "academic_sosial": 76.50166666666668,
+    "academic_praktik": 81.43833333333333
+  },
+  "Bahasa Dan Sastra Inggris": {
+    "academic_logika": 76.89566666666667,
+    "academic_bahasa": 81.621,
+    "academic_sains": 77.00800000000001,
+    "academic_sosial": 84.38766666666666,
+    "academic_praktik": 74.628
+  },
+  "Desain Komunikasi Visual": {
+    "academic_logika": 76.54599999999999,
+    "academic_bahasa": 79.576,
+    "academic_sains": 77.18266666666666,
+    "academic_sosial": 75.644,
+    "academic_praktik": 81.526
+  },
+  "Ekonomi Pembangunan": {
+    "academic_logika": 81.76129032258065,
+    "academic_bahasa": 79.92204301075269,
+    "academic_sains": 76.92150537634409,
+    "academic_sosial": 84.90833333333333,
+    "academic_praktik": 74.8771505376344
+  },
+  "Geografi": {
+    "academic_logika": 76.93809523809524,
+    "academic_bahasa": 76.34940476190476,
+    "academic_sains": 77.13452380952381,
+    "academic_sosial": 75.13363095238095,
+    "academic_praktik": 74.77470238095238
+  },
+  "Ilmu Administrasi Negara": {
+    "academic_logika": 82.10142857142857,
+    "academic_bahasa": 80.54428571428572,
+    "academic_sains": 76.64714285714285,
+    "academic_sosial": 84.72214285714286,
+    "academic_praktik": 74.9992857142857
+  },
+  "Ilmu Hukum": {
+    "academic_logika": 82.9491935483871,
+    "academic_bahasa": 80.11451612903227,
+    "academic_sains": 75.5741935483871,
+    "academic_sosial": 85.4491935483871,
+    "academic_praktik": 74.88064516129032
+  },
+  "Ilmu Komunikasi": {
+    "academic_logika": 76.65074626865672,
+    "academic_bahasa": 79.67611940298508,
+    "academic_sains": 76.27835820895523,
+    "academic_sosial": 84.02910447761194,
+    "academic_praktik": 74.55522388059701
+  },
+  "Informatika": {
+    "academic_logika": 87.39237804878049,
+    "academic_bahasa": 76.88567073170732,
+    "academic_sains": 86.14451219512196,
+    "academic_sosial": 75.75121951219512,
+    "academic_praktik": 76.04756097560976
+  },
+  "Keperawatan": {
+    "academic_logika": 82.02246376811594,
+    "academic_bahasa": 80.64275362318841,
+    "academic_sains": 76.94565217391305,
+    "academic_sosial": 85.21920289855072,
+    "academic_praktik": 74.89347826086956
+  },
+  "Manajemen": {
+    "academic_logika": 76.76666666666667,
+    "academic_bahasa": 79.99855072463768,
+    "academic_sains": 76.5268115942029,
+    "academic_sosial": 84.95217391304348,
+    "academic_praktik": 75.34057971014492
+  },
+  "Manajemen Pajak": {
+    "academic_logika": 82.35486111111112,
+    "academic_bahasa": 76.97465277777778,
+    "academic_sains": 76.29583333333333,
+    "academic_sosial": 81.21909722222222,
+    "academic_praktik": 74.29513888888889
+  },
+  "Manajemen Perdagangan": {
+    "academic_logika": 77.08958333333334,
+    "academic_bahasa": 79.11250000000001,
+    "academic_sains": 76.71944444444445,
+    "academic_sosial": 84.82569444444444,
+    "academic_praktik": 75.01041666666667
+  },
+  "Manajemen Perhotelan": {
+    "academic_logika": 76.5475,
+    "academic_bahasa": 78.841875,
+    "academic_sains": 75.85625,
+    "academic_sosial": 85.218125,
+    "academic_praktik": 75.706875
+  },
+  "Pariwisata": {
+    "academic_logika": 77.0425,
+    "academic_bahasa": 79.3175,
+    "academic_sains": 75.32625,
+    "academic_sosial": 84.519375,
+    "academic_praktik": 74.928125
+  },
+  "Pendidikan Agama Islam": {
+    "academic_logika": 76.47066666666667,
+    "academic_bahasa": 80.82666666666667,
+    "academic_sains": 76.22266666666667,
+    "academic_sosial": 84.902,
+    "academic_praktik": 75.22066666666667
+  },
+  "Pendidikan Bahasa Dan Sastra Indonesia": {
+    "academic_logika": 77.3367816091954,
+    "academic_bahasa": 81.24367816091954,
+    "academic_sains": 76.21609195402299,
+    "academic_sosial": 84.51551724137931,
+    "academic_praktik": 74.35344827586206
+  },
+  "Pendidikan Bahasa Indonesia": {
+    "academic_logika": 76.86986301369863,
+    "academic_bahasa": 80.88561643835617,
+    "academic_sains": 77.06301369863014,
+    "academic_sosial": 84.4777397260274,
+    "academic_praktik": 75.02671232876712
+  },
+  "Pendidikan Bahasa Inggris": {
+    "academic_logika": 76.50481927710842,
+    "academic_bahasa": 81.35030120481927,
+    "academic_sains": 76.14819277108434,
+    "academic_sosial": 84.34457831325301,
+    "academic_praktik": 74.94216867469879
+  },
+  "Pendidikan Bahasa Jepang": {
+    "academic_logika": 76.76964285714287,
+    "academic_bahasa": 80.52098214285715,
+    "academic_sains": 76.05178571428571,
+    "academic_sosial": 84.52142857142857,
+    "academic_praktik": 75.04151785714285
+  },
+  "Pendidikan Biologi": {
+    "academic_logika": 88.21693548387097,
+    "academic_bahasa": 76.83548387096775,
+    "academic_sains": 86.98064516129033,
+    "academic_sosial": 76.26693548387097,
+    "academic_praktik": 75.26129032258065
+  },
+  "Pendidikan Ekonomi": {
+    "academic_logika": 81.93857142857142,
+    "academic_bahasa": 79.73714285714286,
+    "academic_sains": 76.47142857142858,
+    "academic_sosial": 84.66142857142857,
+    "academic_praktik": 74.62785714285714
+  },
+  "Pendidikan Fisika": {
+    "academic_logika": 87.74883720930232,
+    "academic_bahasa": 76.52906976744185,
+    "academic_sains": 83.66511627906976,
+    "academic_sosial": 76.51046511627906,
+    "academic_praktik": 74.73081395348837
+  },
+  "Pendidikan Geografi": {
+    "academic_logika": 77.01923076923077,
+    "academic_bahasa": 76.88461538461539,
+    "academic_sains": 76.17230769230768,
+    "academic_sosial": 76.15230769230769,
+    "academic_praktik": 75.14461538461538
+  },
+  "Pendidikan Guru Pendidikan Anak Usia Dini": {
+    "academic_logika": 75.86825396825397,
+    "academic_bahasa": 83.18214285714286,
+    "academic_sains": 77.94920634920635,
+    "academic_sosial": 84.82857142857142,
+    "academic_praktik": 74.60793650793651
+  },
+  "Pendidikan Guru Sekolah Dasar": {
+    "academic_logika": 76.1975,
+    "academic_bahasa": 81.4609375,
+    "academic_sains": 77.13,
+    "academic_sosial": 84.1696875,
+    "academic_praktik": 74.715625
+  },
+  "Pendidikan Ilmu Pengetahuan Alam": {
+    "academic_logika": 87.7268115942029,
+    "academic_bahasa": 76.57391304347827,
+    "academic_sains": 86.5840579710145,
+    "academic_sosial": 75.6376811594203,
+    "academic_praktik": 74.80434782608695
+  },
+  "Pendidikan Ilmu Pengetahuan Sosial": {
+    "academic_logika": 75.82,
+    "academic_bahasa": 80.98857142857143,
+    "academic_sains": 76.97785714285715,
+    "academic_sosial": 84.42571428571429,
+    "academic_praktik": 74.79285714285714
+  },
+  "Pendidikan Keagamaan Islam": {
+    "academic_logika": 76.40972222222223,
+    "academic_bahasa": 80.95902777777778,
+    "academic_sains": 77.85763888888889,
+    "academic_sosial": 84.64305555555556,
+    "academic_praktik": 75.77048611111111
+  },
+  "Pendidikan Kimia": {
+    "academic_logika": 88.00722891566265,
+    "academic_bahasa": 76.3277108433735,
+    "academic_sains": 87.42650602409638,
+    "academic_sosial": 74.60361445783133,
+    "academic_praktik": 75.26927710843374
+  },
+  "Pendidikan Luar Biasa": {
+    "academic_logika": 75.73235294117647,
+    "academic_bahasa": 81.64191176470588,
+    "academic_sains": 76.85441176470589,
+    "academic_sosial": 84.23455882352941,
+    "academic_praktik": 74.24926470588235
+  },
+  "Pendidikan Matematika": {
+    "academic_logika": 87.95344827586207,
+    "academic_bahasa": 76.49310344827587,
+    "academic_sains": 87.49827586206897,
+    "academic_sosial": 75.03620689655173,
+    "academic_praktik": 74.06896551724138
+  },
+  "Pendidikan Musik": {
+    "academic_logika": 76.22380952380954,
+    "academic_bahasa": 79.19682539682539,
+    "academic_sains": 76.39603174603174,
+    "academic_sosial": 75.79642857142858,
+    "academic_praktik": 82.0111111111111
+  },
+  "Pendidikan Non Formal": {
+    "academic_logika": 76.49679487179488,
+    "academic_bahasa": 81.66602564102564,
+    "academic_sains": 76.17692307692307,
+    "academic_sosial": 84.22435897435898,
+    "academic_praktik": 75.25160256410257
+  },
+  "Pendidikan Pancasila Dan Kewarganegaraan": {
+    "academic_logika": 82.36805555555556,
+    "academic_bahasa": 81.92604166666666,
+    "academic_sains": 75.9673611111111,
+    "academic_sosial": 85.76631944444445,
+    "academic_praktik": 74.49097222222223
+  },
+  "Pendidikan Sejarah": {
+    "academic_logika": 76.48071428571428,
+    "academic_bahasa": 81.40857142857143,
+    "academic_sains": 75.50142857142858,
+    "academic_sosial": 84.67714285714285,
+    "academic_praktik": 74.99285714285715
+  },
+  "Pendidikan Seni Drama Tari Dan Musik": {
+    "academic_logika": 74.97945205479452,
+    "academic_bahasa": 78.74931506849315,
+    "academic_sains": 76.90273972602739,
+    "academic_sosial": 75.72739726027397,
+    "academic_praktik": 81.96917808219177
+  },
+  "Pendidikan Seni Rupa": {
+    "academic_logika": 77.36311475409835,
+    "academic_bahasa": 79.24180327868852,
+    "academic_sains": 76.27868852459017,
+    "academic_sosial": 75.88196721311476,
+    "academic_praktik": 81.77049180327869
+  },
+  "Pendidikan Sosiologi": {
+    "academic_logika": 76.84166666666667,
+    "academic_bahasa": 81.52532051282051,
+    "academic_sains": 76.62307692307692,
+    "academic_sosial": 84.39391025641027,
+    "academic_praktik": 74.6275641025641
+  },
+  "Pendidikan Tari": {
+    "academic_logika": 76.00058823529412,
+    "academic_bahasa": 78.8629411764706,
+    "academic_sains": 76.16117647058823,
+    "academic_sosial": 75.46823529411765,
+    "academic_praktik": 81.81
+  },
+  "Pendidikan Tata Rias Dan Kecantikan": {
+    "academic_logika": 77.16492537313434,
+    "academic_bahasa": 78.96716417910449,
+    "academic_sains": 76.24477611940299,
+    "academic_sosial": 75.57462686567165,
+    "academic_praktik": 82.47164179104477
+  },
+  "Pendidikan Teknik Bangunan": {
+    "academic_logika": 85.59583333333333,
+    "academic_bahasa": 76.30694444444445,
+    "academic_sains": 85.4,
+    "academic_sosial": 75.82361111111112,
+    "academic_praktik": 75.01249999999999
+  },
+  "Pendidikan Teknik Elektro": {
+    "academic_logika": 88.16666666666667,
+    "academic_bahasa": 76.8525641025641,
+    "academic_sains": 88.21538461538462,
+    "academic_sosial": 75.39807692307693,
+    "academic_praktik": 74.79935897435897
+  },
+  "Pendidikan Teknik Elektronika": {
+    "academic_logika": 88.25189873417722,
+    "academic_bahasa": 76.50443037974684,
+    "academic_sains": 86.3386075949367,
+    "academic_sosial": 75.59683544303797,
+    "academic_praktik": 75.03227848101265
+  },
+  "Pendidikan Teknik Informatika": {
+    "academic_logika": 88.34866666666666,
+    "academic_bahasa": 77.15333333333334,
+    "academic_sains": 87.006,
+    "academic_sosial": 75.72333333333333,
+    "academic_praktik": 74.35566666666666
+  },
+  "Pendidikan Teknik Mesin": {
+    "academic_logika": 85.18469387755103,
+    "academic_bahasa": 76.85561224489797,
+    "academic_sains": 85.63979591836735,
+    "academic_sosial": 75.14285714285714,
+    "academic_praktik": 74.6811224489796
+  },
+  "Pendidikan Vokasional Desain Fashion": {
+    "academic_logika": 77.09823943661972,
+    "academic_bahasa": 78.95316901408451,
+    "academic_sains": 76.42535211267605,
+    "academic_sosial": 75.71302816901408,
+    "academic_praktik": 82.32570422535211
+  },
+  "Pendidikan Vokasional Seni Kuliner": {
+    "academic_logika": 77.31119402985075,
+    "academic_bahasa": 79.91231343283582,
+    "academic_sains": 75.58358208955224,
+    "academic_sosial": 84.59253731343283,
+    "academic_praktik": 82.30373134328359
+  },
+  "Penginderaan Jauh Dan Sistem Informasi Geografis": {
+    "academic_logika": 88.0587837837838,
+    "academic_bahasa": 76.66486486486487,
+    "academic_sains": 86.31486486486487,
+    "academic_sosial": 76.30472972972973,
+    "academic_praktik": 74.05675675675676
+  },
+  "Perpustakaan Dan Ilmu Informasi": {
+    "academic_logika": 82.90681818181818,
+    "academic_bahasa": 75.77727272727273,
+    "academic_sains": 76.51060606060605,
+    "academic_sosial": 80.93181818181819,
+    "academic_praktik": 75.17878787878789
+  },
+  "Psikologi": {
+    "academic_logika": 76.73141025641026,
+    "academic_bahasa": 81.53878205128204,
+    "academic_sains": 76.31025641025641,
+    "academic_sosial": 85.39358974358974,
+    "academic_praktik": 74.63782051282051
+  },
+  "Sastra Indonesia": {
+    "academic_logika": 75.79152542372881,
+    "academic_bahasa": 81.30169491525425,
+    "academic_sains": 75.92033898305085,
+    "academic_sosial": 83.74067796610169,
+    "academic_praktik": 74.65847457627119
+  },
+  "Sastra Inggris": {
+    "academic_logika": 76.86514084507043,
+    "academic_bahasa": 81.6056338028169,
+    "academic_sains": 76.7605633802817,
+    "academic_sosial": 85.16795774647888,
+    "academic_praktik": 74.77288732394366
+  },
+  "Statistika": {
+    "academic_logika": 88.10833333333333,
+    "academic_bahasa": 75.93125,
+    "academic_sains": 86.24097222222223,
+    "academic_sosial": 75.3736111111111,
+    "academic_praktik": 75.4986111111111
+  },
+  "Teknik Elektro": {
+    "academic_logika": 87.521875,
+    "academic_bahasa": 76.248125,
+    "academic_sains": 87.33375,
+    "academic_sosial": 75.643125,
+    "academic_praktik": 74.63374999999999
+  },
+  "Teknik Elektro Industri": {
+    "academic_logika": 88.66854838709678,
+    "academic_bahasa": 77.16048387096774,
+    "academic_sains": 88.44193548387096,
+    "academic_sosial": 76.15403225806452,
+    "academic_praktik": 75.09435483870968
+  },
+  "Teknik Elektronika": {
+    "academic_logika": 88.33815789473684,
+    "academic_bahasa": 77.06480263157896,
+    "academic_sains": 86.88421052631578,
+    "academic_sosial": 75.3782894736842,
+    "academic_praktik": 75.40986842105262
+  },
+  "Teknik Geologi": {
+    "academic_logika": 88.18571428571428,
+    "academic_bahasa": 76.00214285714286,
+    "academic_sains": 88.07857142857142,
+    "academic_sosial": 75.88571428571429,
+    "academic_praktik": 74.8132142857143
+  },
+  "Teknik Listrik": {
+    "academic_logika": 87.58541666666666,
+    "academic_bahasa": 76.71944444444445,
+    "academic_sains": 86.35,
+    "academic_sosial": 75.93958333333333,
+    "academic_praktik": 74.56875
+  },
+  "Teknik Mesin": {
+    "academic_logika": 85.10822784810127,
+    "academic_bahasa": 76.67215189873419,
+    "academic_sains": 86.34430379746836,
+    "academic_sosial": 75.01582278481013,
+    "academic_praktik": 75.00379746835443
+  },
+  "Teknik Otomotif": {
+    "academic_logika": 84.97094594594596,
+    "academic_bahasa": 76.35979729729729,
+    "academic_sains": 85.13581081081081,
+    "academic_sosial": 75.59864864864865,
+    "academic_praktik": 75.4412162162162
+  },
+  "Teknik Pertambangan": {
+    "academic_logika": 87.82611940298509,
+    "academic_bahasa": 76.2455223880597,
+    "academic_sains": 86.94328358208955,
+    "academic_sosial": 75.51268656716418,
+    "academic_praktik": 74.69850746268656
+  },
+  "Teknik Sipil": {
+    "academic_logika": 85.29076923076923,
+    "academic_bahasa": 76.43153846153847,
+    "academic_sains": 86.91076923076923,
+    "academic_sosial": 76.63192307692307,
+    "academic_praktik": 75.01615384615386
+  },
+  "Teknik Sipil Bangunan Gedung": {
+    "academic_logika": 86.01214285714286,
+    "academic_bahasa": 76.43035714285715,
+    "academic_sains": 85.63000000000001,
+    "academic_sosial": 75.6092857142857,
+    "academic_praktik": 75.33178571428572
+  },
+  "Teknologi Kosmetik": {
+    "academic_logika": 76.41227272727274,
+    "academic_bahasa": 77.39818181818181,
+    "academic_sains": 75.38727272727273,
+    "academic_sosial": 76.62136363636364,
+    "academic_praktik": 75.60227272727273
+  },
+  "Teknologi Rekayasa Sistem Elektronika": {
+    "academic_logika": 88.46217105263158,
+    "academic_bahasa": 77.23519736842105,
+    "academic_sains": 88.21184210526316,
+    "academic_sosial": 75.78026315789474,
+    "academic_praktik": 74.33125
+  }
+}
