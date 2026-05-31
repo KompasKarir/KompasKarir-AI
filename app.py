@@ -514,9 +514,9 @@ async def health():
 @app.get("/", tags=["System"])
 async def root():
     return JSONResponse(content={
-        "message": "Capstone Recommendation API v4.1",
+        "message": "KompasKarir AI",
+        "status": "online",
         "docs": "/docs",
-        "endpoints": {"analyze": "POST /api/analyze"},
     })
 
 
