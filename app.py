@@ -7,7 +7,7 @@ import re
 from contextlib import asynccontextmanager
 from functools import lru_cache
 from typing import Annotated, Any, AsyncGenerator
- 
+
 import numpy as np
 import tensorflow as tf
 from fastapi import Depends, FastAPI, HTTPException, Security, status
@@ -17,39 +17,40 @@ from fastapi.security import APIKeyHeader
 from openai import OpenAI
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings
- 
+
+
 # Logging
- 
+
 logging.basicConfig(
     level=os.getenv("LOG_LEVEL", "INFO"),
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 logger = logging.getLogger(__name__)
- 
- 
+
+
 # Settings
- 
+
 class Settings(BaseSettings):
     INTERNAL_API_KEY: str = os.getenv("INTERNAL_API_KEY", "")
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
     GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "google/gemini-3-flash-preview")
     MODEL_DIR: str = os.getenv("MODEL_DIR", "model_artifacts")
- 
+
     class Config:
         env_file = ".env"
         extra = "ignore"
- 
- 
+
+
 @lru_cache()
 def get_settings() -> Settings:
     return Settings()
- 
- 
-# Auth
- 
+
+
+# Autentikasi
+
 api_key_header = APIKeyHeader(name="X-Internal-API-Key", auto_error=False)
- 
- 
+
+
 async def verify_internal_key(api_key: str = Security(api_key_header)) -> str:
     settings = get_settings()
     if not settings.INTERNAL_API_KEY:
@@ -64,10 +65,10 @@ async def verify_internal_key(api_key: str = Security(api_key_header)) -> str:
             headers={"WWW-Authenticate": "X-Internal-API-Key"},
         )
     return api_key
- 
- 
-# Schemas
- 
+
+
+# Schema Request
+
 class RiasecInput(BaseModel):
     r: float = Field(..., ge=0, le=100)
     i: float = Field(..., ge=0, le=100)
@@ -75,57 +76,60 @@ class RiasecInput(BaseModel):
     s: float = Field(..., ge=0, le=100)
     e: float = Field(..., ge=0, le=100)
     c: float = Field(..., ge=0, le=100)
- 
- 
+
+
 class AkademikInput(BaseModel):
     logika: float = Field(..., ge=0, le=100)
     bahasa: float = Field(..., ge=0, le=100)
     sains: float = Field(..., ge=0, le=100)
     sosial: float = Field(..., ge=0, le=100)
     praktik: float = Field(..., ge=0, le=100)
- 
- 
+
+
 class AnalyzeRequest(BaseModel):
     riasec: RiasecInput
     akademik: AkademikInput
     top_k: int = Field(default=3, ge=1, le=10)
- 
- 
-# Custom Keras Layer
- 
+
+
+# Custom Keras Layer — RIASECAttentionLayer
+
 @tf.keras.utils.register_keras_serializable()
 class RIASECAttentionLayer(tf.keras.layers.Layer):
- 
+
     def __init__(self, units=64, **kwargs):
         super().__init__(**kwargs)
         self.units = units
         self.attention_dense = tf.keras.layers.Dense(1, use_bias=False)
         self.projection = tf.keras.layers.Dense(units, activation="relu")
- 
+
     def build(self, input_shape):
         self.attention_dense.build((input_shape[0], input_shape[1], 1))
         self.projection.build(input_shape)
         super().build(input_shape)
- 
+
     def call(self, inputs):
+        # Hitung skor perhatian per dimensi RIASEC
         x_expanded = tf.expand_dims(inputs, axis=-1)
         attn_scores = self.attention_dense(x_expanded)
+        # Normalisasi skor menjadi bobot (total = 1)
         attn_weights = tf.nn.softmax(attn_scores, axis=1)
+        # Kalikan input dengan bobotnya, lalu proyeksikan
         weighted = inputs * tf.squeeze(attn_weights, axis=-1)
         return self.projection(weighted)
- 
+
     def get_config(self):
         config = super().get_config()
         config.update({"units": self.units})
         return config
- 
- 
-# Inference Service
- 
+
+
+# Konstanta Inference
+
 MODEL_DIR      = os.getenv("MODEL_DIR", "model_artifacts")
 RIASEC_ORDER   = ["r", "i", "a", "s", "e", "c"]
 AKADEMIK_ORDER = ["logika", "bahasa", "sains", "sosial", "praktik"]
- 
+
 RIASEC_LABELS = {
     "R": "Realistik",
     "I": "Investigatif",
@@ -134,33 +138,36 @@ RIASEC_LABELS = {
     "E": "Enterprising",
     "C": "Konvensional",
 }
- 
-MIN_PROB_THRESHOLD = 0.01  # sama dengan Colab: rumpun < 1% difilter
- 
- 
+
+MIN_PROB_THRESHOLD = 0.01  # rumpun di bawah 1% tidak ditampilkan
+
+
+# Loader Artifacts
+
 def _load_pickle(filename: str) -> Any:
     with open(os.path.join(MODEL_DIR, filename), "rb") as f:
         return pickle.load(f)
- 
- 
+
+
 def _load_json(filename: str) -> Any:
     with open(os.path.join(MODEL_DIR, filename), "r", encoding="utf-8") as f:
         return json.load(f)
- 
- 
+
+
 @lru_cache(maxsize=1)
 def load_artifacts() -> dict:
     logger.info("Memuat model artifacts dari '%s' …", MODEL_DIR)
     arts = {
-        "label_encoder":       _load_pickle("label_encoder.pkl"),
-        "scaler_riasec":       _load_pickle("scaler_riasec.pkl"),
-        "scaler_akademik":     _load_pickle("scaler_akademik.pkl"),
-        "model_info":          _load_json("model_info.json"),
-        "prodi_riasec_mean":   _load_json("prodi_riasec_mean.json"),
-        "prodi_akademik_mean": _load_json("prodi_akademik_mean.json"),
-        "rumpun_list":         _load_json("rumpun_list.json"),
-        "rumpun_to_prodi":     _load_json("rumpun_to_prodi.json"),
+        "label_encoder":       _load_pickle("label_encoder.pkl"),      # encoder label rumpun
+        "scaler_riasec":       _load_pickle("scaler_riasec.pkl"),      # StandardScaler RIASEC
+        "scaler_akademik":     _load_pickle("scaler_akademik.pkl"),    # StandardScaler akademik
+        "model_info":          _load_json("model_info.json"),          # metadata model
+        "prodi_riasec_mean":   _load_json("prodi_riasec_mean.json"),   # profil rata-rata RIASEC per prodi
+        "prodi_akademik_mean": _load_json("prodi_akademik_mean.json"), # profil rata-rata akademik per prodi
+        "rumpun_list":         _load_json("rumpun_list.json"),         # daftar semua rumpun
+        "rumpun_to_prodi":     _load_json("rumpun_to_prodi.json"),     # mapping rumpun → daftar prodi
     }
+    # Load model Keras dengan custom layer yang sudah didaftarkan
     arts["model"] = tf.keras.models.load_model(
         os.path.join(MODEL_DIR, "model_riasec.keras"),
         custom_objects={"RIASECAttentionLayer": RIASECAttentionLayer},
@@ -169,27 +176,38 @@ def load_artifacts() -> dict:
     )
     logger.info("Model artifacts berhasil dimuat.")
     return arts
- 
- 
+
+
+# Helper — Cosine Similarity
+
 def _cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
     na, nb = np.linalg.norm(a), np.linalg.norm(b)
     return float(np.dot(a, b) / (na * nb)) if na and nb else 0.0
- 
- 
+
+
+# Fungsi Utama Prediksi
+
 def run_prediction(riasec: dict, akademik: dict, top_k: int = 3) -> dict:
     arts = load_artifacts()
- 
+
+    # Persiapan vektor input
     riasec_vec   = np.array([riasec[k]   for k in RIASEC_ORDER],   dtype=np.float32)
     akademik_vec = np.array([akademik[k] for k in AKADEMIK_ORDER], dtype=np.float32)
- 
+
+    # Scaling
     riasec_scaled   = arts["scaler_riasec"].transform(riasec_vec.reshape(1, -1))
     akademik_scaled = arts["scaler_akademik"].transform(akademik_vec.reshape(1, -1))
- 
+
+    # Prediksi model — Tahap 1
     raw_pred = arts["model"].predict([riasec_scaled, akademik_scaled], verbose=0)
- 
+
+    # Label rumpun dengan probabilitas tertinggi (prediksi utama)
     pred_label  = arts["label_encoder"].inverse_transform([int(np.argmax(raw_pred, axis=1)[0])])[0]
+
+    # Kode RIASEC: 3 huruf dari dimensi RIASEC tertinggi, contoh: "IAE"
     kode_riasec = "".join([k.upper() for k in RIASEC_ORDER][i] for i in np.argsort(riasec_vec)[::-1][:3])
- 
+
+    # Top personality
     top3_idx = np.argsort(raw_pred[0])[::-1][:3]
     top_personality = [
         {
@@ -197,63 +215,79 @@ def run_prediction(riasec: dict, akademik: dict, top_k: int = 3) -> dict:
             "probabilitas": round(float(raw_pred[0][i]) * 100, 2),
         }
         for i in top3_idx
+        if raw_pred[0][i] >= MIN_PROB_THRESHOLD  # hanya tampilkan yang >= 1%
     ]
- 
+    # Fallback: pastikan minimal 1 item muncul
+    if not top_personality:
+        i = top3_idx[0]
+        top_personality = [{
+            "label":        arts["label_encoder"].inverse_transform([int(i)])[0],
+            "probabilitas": round(float(raw_pred[0][i]) * 100, 2),
+        }]
+
     pred = raw_pred[0]
- 
-    # Ambil top_k kandidat dulu
+
+    # Filter dan normalisasi rumpun
     top_idx_all = np.argsort(pred)[::-1][:top_k]
- 
-    # Filter rumpun yang probabilitasnya < 1% (MIN_PROB_THRESHOLD)
+
     top_idx = [idx for idx in top_idx_all if pred[idx] >= MIN_PROB_THRESHOLD]
- 
-    # Fallback: jika semua di bawah threshold, tetap tampilkan yang tertinggi
+
+    # Fallback: jika semua rumpun di bawah threshold, tetap tampilkan yang tertinggi
     if not top_idx:
         top_idx = [top_idx_all[0]]
- 
-    # Normalisasi ulang agar total kecocokan = 100%
+
+    # Normalisasi: agar persentase kecocokan yang ditampilkan totalnya 100%
     raw_probs  = np.array([pred[idx] for idx in top_idx])
     norm_probs = raw_probs / raw_probs.sum()
- 
+
+    # Rekomendasi prodi — Tahap 2
     rekomendasi = []
     for idx, norm_prob in zip(top_idx, norm_probs):
         rumpun    = arts["label_encoder"].classes_[idx]
+        # Gabungkan vektor RIASEC dan akademik menjadi satu vektor 11 dimensi
         input_vec = np.concatenate([riasec_vec, akademik_vec])
+
+        # Hitung similarity input vs profil rata-rata tiap prodi dalam rumpun ini
         scores = []
         for prodi in arts["rumpun_to_prodi"].get(rumpun, []):
             if prodi not in arts["prodi_riasec_mean"] or prodi not in arts["prodi_akademik_mean"]:
                 continue
+            # Profil rata-rata prodi: gabungan RIASEC mean + akademik mean
             pv = np.array(
                 list(arts["prodi_riasec_mean"][prodi].values()) +
                 list(arts["prodi_akademik_mean"][prodi].values())
             )
             scores.append({"program_name": prodi, "raw": _cosine_similarity(input_vec, pv)})
- 
+
+        # Urutkan prodi dari similarity tertinggi, ambil top 3
         scores.sort(key=lambda x: x["raw"], reverse=True)
         total = sum(x["raw"] for x in scores[:3])
+
+        # Normalisasi similarity 3 prodi teratas agar totalnya = 100%
         prodi_final = (
             [{"program_name": p["program_name"], "similarity_persen": round(p["raw"] / total * 100, 1)}
              for p in scores[:3]]
             if total > 0 else []
         )
+
         rekomendasi.append({
             "rumpun":           rumpun,
             "kecocokan_persen": round(float(norm_prob) * 100, 2),
             "prodi_tersedia":   prodi_final,
         })
- 
+
     return {
         "kode_riasec":     kode_riasec,
         "prediksi_utama":  pred_label,
         "top_personality": top_personality,
         "rekomendasi":     rekomendasi,
     }
- 
- 
+
+
 # Gemini Service
- 
+
 _gemini_client: Any = None
- 
+
 GEMINI_SYSTEM = (
     "Kamu adalah konselor pendidikan Indonesia yang profesional dan empatik. "
     "Tugas kamu adalah menjelaskan hasil analisis minat dan kemampuan "
@@ -261,9 +295,10 @@ GEMINI_SYSTEM = (
     "Jangan pernah menggunakan kata 'siswa ini', 'ia', atau 'mereka'. "
     "Balas HANYA dengan JSON valid, tanpa markdown, tanpa teks lain."
 )
- 
- 
+
+
 def _get_gemini_client() -> Any:
+    # Inisialisasi client Gemini sekali, lalu reuse untuk request berikutnya
     global _gemini_client
     if _gemini_client is None:
         settings = get_settings()
@@ -274,59 +309,51 @@ def _get_gemini_client() -> Any:
             base_url="https://core.snifoxai.com/v1",
         )
     return _gemini_client
- 
- 
-def _build_narasi_prompt(
-    riasec: dict,
-    akademik: dict,
-    prediction: dict,
-) -> str:
-    riasec_lines = "\n".join(
-        f"  {k.upper()} ({RIASEC_LABELS.get(k.upper(), k)}): {riasec[k]:.1f}"
-        for k in RIASEC_ORDER
-    )
- 
-    akademik_lines = "\n".join(
-        f"  {k.capitalize()}: {akademik[k]:.1f}"
-        for k in AKADEMIK_ORDER
-    )
- 
+
+
+def _build_narasi_prompt(riasec: dict, akademik: dict, prediction: dict) -> str:
+    """
+    Membangun prompt kaya data untuk Gemini agar narasi yang dihasilkan
+    benar-benar personal berdasarkan angka, bukan template generik.
+    """
     top_personality = prediction.get("top_personality", [])
     utama = top_personality[0] if len(top_personality) > 0 else {}
     alt1  = top_personality[1] if len(top_personality) > 1 else {}
     alt2  = top_personality[2] if len(top_personality) > 2 else {}
- 
+
+    # Cari dimensi RIASEC tertinggi dan terendah untuk konteks narasi
     riasec_sorted = sorted(
         [(k.upper(), riasec[k]) for k in RIASEC_ORDER],
         key=lambda x: x[1], reverse=True,
     )
     tertinggi = riasec_sorted[0]
     terendah  = riasec_sorted[-1]
- 
+
+    # Cari kemampuan akademik terkuat dan terlemah
     akademik_sorted = sorted(
         [(k.capitalize(), akademik[k]) for k in AKADEMIK_ORDER],
         key=lambda x: x[1], reverse=True,
     )
     ak_tertinggi = akademik_sorted[0]
     ak_terendah  = akademik_sorted[-1]
- 
-    utama_label = utama.get("label", "-")
-    alt1_label  = alt1.get("label",  "-")
- 
+
+    utama_label     = utama.get("label", "-")
+    alt1_label      = alt1.get("label",  "-")
     riasec_detail   = "; ".join(f"{k.upper()}={riasec[k]:.0f}" for k in RIASEC_ORDER)
     akademik_detail = "; ".join(f"{k.capitalize()}={akademik[k]:.0f}" for k in AKADEMIK_ORDER)
     utama_prob      = utama.get("probabilitas", 0)
     alt1_prob       = alt1.get("probabilitas", 0)
     alt2_label      = alt2.get("label", "-")
     alt2_prob       = alt2.get("probabilitas", 0)
- 
+
+    # Template JSON yang harus diisi oleh Gemini
     json_template = (
         '{"ringkasan":"2-3 kalimat langsung ke kamu tentang pola minat & kemampuanmu",'
         '"kekuatan":["konkret 1","konkret 2","konkret 3"],'
         f'"alasan_kecocokan":"mengapa {utama_label} cocok vs {alt1_label}, pakai angka",'
         '"saran_pengembangan":"1-2 kalimat saran konkret ke kamu"}'
     )
- 
+
     prompt = (
         "## Peran & Gaya Bahasa\n"
         "Kamu adalah konselor pendidikan yang sedang berbicara langsung kepada peserta.\n"
@@ -345,10 +372,10 @@ def _build_narasi_prompt(
         "Total output JSON tidak boleh melebihi 300 kata.\n\n"
         f"Balas HANYA JSON ini:\n{json_template}"
     )
- 
+
     return prompt
- 
- 
+
+
 def _call_gemini_narasi(
     riasec: dict,
     akademik: dict,
@@ -356,16 +383,21 @@ def _call_gemini_narasi(
     settings: Settings,
     max_retries: int = 2,
 ) -> dict:
+    """
+    Memanggil Gemini API dengan retry otomatis.
+    Jika response JSON tidak lengkap atau gagal di-parse,
+    akan dicoba ulang hingga max_retries kali.
+    """
     client = _get_gemini_client()
     prompt = _build_narasi_prompt(riasec, akademik, prediction)
- 
+
     logger.info(
         "Gemini narasi | RIASEC: %s | model: %s | prompt: %d karakter",
         prediction.get("kode_riasec", "?"),
         settings.GEMINI_MODEL,
         len(prompt),
     )
- 
+
     last_raw = ""
     for attempt in range(1, max_retries + 1):
         response = client.chat.completions.create(
@@ -377,7 +409,8 @@ def _call_gemini_narasi(
             temperature=0.5,
             max_tokens=2048,
         )
- 
+
+        # Log finish_reason untuk memudahkan debug jika response terpotong
         try:
             finish_reason = response.choices[0].finish_reason
             logger.info("Gemini finish_reason (attempt %d): %s", attempt, finish_reason)
@@ -388,14 +421,16 @@ def _call_gemini_narasi(
                 )
         except Exception:
             pass
- 
+
+        # Bersihkan markdown fence jika Gemini menambahkannya (```json ... ```)
         raw = response.choices[0].message.content.strip()
         raw = re.sub(r"^```[a-z]*\n?", "", raw)
         raw = re.sub(r"\n?```$", "", raw).strip()
         last_raw = raw
- 
+
         logger.info("RAW GEMINI RESPONSE (attempt %d): %s", attempt, raw[:600])
- 
+
+        # Validasi: parse JSON dan pastikan semua field wajib ada
         try:
             result = json.loads(raw)
             required = {"ringkasan", "kekuatan", "alasan_kecocokan", "saran_pengembangan"}
@@ -404,15 +439,20 @@ def _call_gemini_narasi(
             logger.warning("Gemini response tidak lengkap (attempt %d): %s", attempt, list(result.keys()))
         except json.JSONDecodeError:
             logger.error("Gemini JSON parse gagal (attempt %d). Raw: %s", attempt, raw[:300])
- 
+
     logger.error("Semua %d attempt Gemini gagal. Last raw: %s", max_retries, last_raw[:300])
     return {}
- 
- 
+
+
 def _fallback_narasi(prediction: dict, riasec: dict, akademik: dict) -> dict:
+    """
+    Narasi cadangan jika Gemini gagal atau tidak tersedia.
+    Dibuat dari data prediksi secara programatik agar tetap informatif,
+    bukan pesan error generik.
+    """
     top = prediction.get("top_personality", [{}])
     utama_label = top[0].get("label", "bidang yang direkomendasikan") if top else "bidang yang direkomendasikan"
- 
+
     riasec_sorted = sorted(
         [(k.upper(), riasec[k]) for k in RIASEC_ORDER],
         key=lambda x: x[1], reverse=True,
@@ -421,10 +461,10 @@ def _fallback_narasi(prediction: dict, riasec: dict, akademik: dict) -> dict:
         [(k.capitalize(), akademik[k]) for k in AKADEMIK_ORDER],
         key=lambda x: x[1], reverse=True,
     )
- 
+
     dom_r  = f"{riasec_sorted[0][0]} ({RIASEC_LABELS.get(riasec_sorted[0][0], '')})"
     dom_ak = ak_sorted[0][0]
- 
+
     return {
         "ringkasan": (
             f"Kamu menunjukkan dominasi kuat pada dimensi {dom_r} "
@@ -445,49 +485,53 @@ def _fallback_narasi(prediction: dict, riasec: dict, akademik: dict) -> dict:
             "untuk meningkatkan daya saing kamu saat seleksi program studi."
         ),
     }
- 
- 
-# Unified Stream Generator
- 
+
+
+# Stream Generator
+
 async def analyze_and_stream(
     riasec: dict,
     akademik: dict,
     top_k: int,
 ) -> AsyncGenerator[str, None]:
- 
+
+    # Jalankan prediksi model TF dan kirim hasilnya langsung ke client
     prediction = run_prediction(riasec, akademik, top_k)
     yield f"event: prediction\ndata: {json.dumps(prediction, ensure_ascii=False)}\n\n"
- 
+
+    # Jalankan Gemini di thread terpisah agar tidak memblokir event loop async
     settings = get_settings()
- 
     try:
         narasi_dict = await asyncio.to_thread(
             _call_gemini_narasi, riasec, akademik, prediction, settings
         )
+        # Jika Gemini mengembalikan dict kosong, gunakan narasi fallback
         if not narasi_dict:
             narasi_dict = _fallback_narasi(prediction, riasec, akademik)
     except Exception as e:
         logger.exception("Gemini narasi error: %s", e)
         narasi_dict = _fallback_narasi(prediction, riasec, akademik)
- 
+
+    # Gabungkan kode RIASEC dengan narasi Gemini dalam satu payload
     payload = {
         "kode_riasec": prediction["kode_riasec"],
         **narasi_dict,
     }
     yield f"event: narasi\ndata: {json.dumps(payload, ensure_ascii=False)}\n\n"
- 
+
+    # Penanda bahwa stream sudah selesai
     yield "data: [DONE]\n\n"
- 
- 
-# App & Middleware
- 
+
+
+# Aplikasi FastAPI
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("API berhasil dijalankan")
     yield
     logger.info("API dimatikan")
- 
- 
+
+
 app = FastAPI(
     title="Capstone Recommendation API",
     version="4.1.0",
@@ -495,7 +539,7 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc",
 )
- 
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=os.getenv("ALLOWED_ORIGINS", "*").split(","),
@@ -503,17 +547,19 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
- 
- 
+
+
 # Endpoints
- 
+
 @app.api_route("/health", methods=["GET", "HEAD"], tags=["System"])
 async def health():
+    # Health check untuk memastikan service berjalan
     return JSONResponse(content={"status": "ok", "service": "capstone-fastapi", "version": "4.1.0"})
- 
- 
+
+
 @app.get("/", tags=["System"])
 async def root():
+    # Root endpoint: informasi dasar API
     return JSONResponse(content={
         "message": "KompasKarir AI",
         "status": "online",
@@ -522,8 +568,8 @@ async def root():
             "analyze": "POST /api/analyze"
         }
     })
- 
- 
+
+
 @app.post(
     "/api/analyze",
     tags=["Analyze"],
@@ -539,6 +585,7 @@ async def analyze(
     body: AnalyzeRequest,
     _: Annotated[str, Depends(verify_internal_key)],
 ) -> StreamingResponse:
+    # Inisialisasi generator stream, lalu kembalikan sebagai StreamingResponse SSE
     try:
         generator = analyze_and_stream(
             riasec=body.riasec.model_dump(),
@@ -548,7 +595,7 @@ async def analyze(
     except Exception as e:
         logger.error("Error inisialisasi stream: %s", e)
         raise HTTPException(status_code=500, detail=str(e))
- 
+
     return StreamingResponse(
         generator,
         media_type="text/event-stream",
