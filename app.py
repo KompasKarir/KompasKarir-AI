@@ -198,17 +198,7 @@ def run_prediction(riasec: dict, akademik: dict, top_k: int = 3) -> dict:
     ]
 
     pred    = raw_pred[0]
-    MIN_PROB_THRESHOLD = 0.01
     top_idx = np.argsort(pred)[::-1][:top_k]
-
-    # Filter rumpun yang prob-nya < 1%
-    top_idx = [idx for idx in top_idx_all if pred[idx] >= MIN_PROB_THRESHOLD]
-    if not top_idx:
-        top_idx = [top_idx_all[0]]
-    
-    # Normalisasi ulang agar total = 100%
-    raw_probs  = np.array([pred[idx] for idx in top_idx])
-    norm_probs = raw_probs / raw_probs.sum()
 
     rekomendasi = []
     for idx in top_idx:
@@ -233,7 +223,7 @@ def run_prediction(riasec: dict, akademik: dict, top_k: int = 3) -> dict:
         )
         rekomendasi.append({
             "rumpun":           rumpun,
-            "kecocokan_persen": round(float(norm_prob) * 100, 2),
+            "kecocokan_persen": round(float(pred[idx]) * 100, 2),
             "prodi_tersedia":   prodi_final,
         })
 
