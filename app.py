@@ -14,8 +14,7 @@ from fastapi import Depends, FastAPI, HTTPException, Security, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.security import APIKeyHeader
-from google import genai
-from google.genai import types as genai_types
+from openai import OpenAI
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings
 
@@ -33,7 +32,7 @@ logger = logging.getLogger(__name__)
 class Settings(BaseSettings):
     INTERNAL_API_KEY: str = os.getenv("INTERNAL_API_KEY", "")
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
-    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "google/gemini-3-flash-preview")
     MODEL_DIR: str = os.getenv("MODEL_DIR", "model_artifacts")
 
     class Config:
@@ -255,7 +254,10 @@ def _get_gemini_client() -> Any:
         settings = get_settings()
         if not settings.GEMINI_API_KEY:
             raise RuntimeError("GEMINI_API_KEY belum dikonfigurasi.")
-        _gemini_client = genai.Client(api_key=settings.GEMINI_API_KEY)
+        _gemini_client = OpenAI(
+            api_key=settings.GEMINI_API_KEY,
+            base_url="https://core.snifoxai.com/v1",
+        )
     return _gemini_client
 
 
@@ -362,29 +364,29 @@ def _call_gemini_narasi(
 
     last_raw = ""
     for attempt in range(1, max_retries + 1):
-        response = client.models.generate_content(
+        response = client.chat.completions.create(
             model=settings.GEMINI_MODEL,
-            contents=prompt,
-            config=genai_types.GenerateContentConfig(
-                system_instruction=GEMINI_SYSTEM,
-                temperature=0.5,
-                max_output_tokens=2048,
-            ),
+            messages=[
+                {"role": "system", "content": GEMINI_SYSTEM},
+                {"role": "user", "content": prompt},
+            ],
+            temperature=0.5,
+            max_tokens=2048,
         )
 
         # Log finish_reason agar mudah debug
         try:
-            finish_reason = response.candidates[0].finish_reason
+            finish_reason = response.choices[0].finish_reason
             logger.info("Gemini finish_reason (attempt %d): %s", attempt, finish_reason)
-            if str(finish_reason) == "MAX_TOKENS":
+            if finish_reason == "length":
                 logger.warning(
                     "Gemini terpotong karena MAX_TOKENS pada attempt %d. "
-                    "Pertimbangkan naikkan max_output_tokens lebih lanjut.", attempt
+                    "Pertimbangkan naikkan max_tokens lebih lanjut.", attempt
                 )
         except Exception:
             pass
 
-        raw = response.text.strip()
+        raw = response.choices[0].message.content.strip()
         raw = re.sub(r"^```[a-z]*\n?", "", raw)
         raw = re.sub(r"\n?```$", "", raw).strip()
         last_raw = raw
