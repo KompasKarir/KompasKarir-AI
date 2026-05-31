@@ -517,7 +517,6 @@ async def root():
         "message": "KompasKarir AI",
         "status": "online",
         "docs": "/docs",
-        "version": "4.1",
         "endpoints": {
             "analyze": "POST /api/analyze"
         }
