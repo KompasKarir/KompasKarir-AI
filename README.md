@@ -63,8 +63,8 @@ Request (POST /api/analyze)
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/<username>/<nama-repo>.git
-cd <nama-repo>
+git clone https://github.com/KompasKarir/KompasKarir-API.git
+cd KompasKarir-API
 ```
 
 ### 2. Buat Virtual Environment
