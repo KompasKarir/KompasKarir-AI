@@ -10,11 +10,15 @@ Backend API sistem rekomendasi program studi berbasis kepribadian RIASEC dengan 
 
 ## Tentang
 
-KompasKarir API adalah backend berbasis FastAPI yang menjadi otak dari sistem rekomendasi program studi. API ini menerima profil RIASEC dan nilai akademik pengguna, kemudian menganalisisnya menggunakan model Machine Learning (TensorFlow) untuk memprediksi rumpun ilmu yang cocok dan merekomendasikan program studi spesifik. Hasilnya diperkaya dengan narasi personal dalam Bahasa Indonesia yang dihasilkan oleh Gemini AI.
+KompasKarir AI adalah backend berbasis FastAPI yang menjadi otak dari sistem rekomendasi program studi. API ini menerima profil RIASEC dan nilai akademik pengguna, kemudian menganalisisnya menggunakan model Machine Learning (TensorFlow) untuk memprediksi rumpun ilmu yang cocok dan merekomendasikan program studi spesifik. Hasilnya diperkaya dengan narasi personal dalam Bahasa Indonesia yang dihasilkan oleh Gemini AI.
+
+Repo ini terdiri dari dua bagian utama:
+- `training/` — notebook Google Colab untuk melatih model Machine Learning
+- `app.py` — backend FastAPI yang melayani hasil prediksi model ke frontend
 
 ## Fitur
 
-- **Prediksi Rumpun Ilmu** — model Keras dengan layer perhatian kustom mengklasifikasikan profil RIASEC ke rumpun ilmu yang paling sesuai
+- **Prediksi Rumpun Ilmu** — model Keras dengan layer perhatian kustom (`RIASECAttentionLayer`) mengklasifikasikan profil RIASEC ke rumpun ilmu yang paling sesuai
 - **Rekomendasi Program Studi** — cosine similarity antara profil pengguna vs profil rata-rata tiap program studi
 - **Narasi Personal (Gemini AI)** — menghasilkan ringkasan kepribadian, kekuatan, alasan kecocokan, dan saran pengembangan dalam Bahasa Indonesia
 - **SSE Streaming** — hasil dikirim bertahap via Server-Sent Events sehingga UI dapat menampilkan data sebelum semua proses selesai
@@ -65,11 +69,29 @@ Dengan Gemini, hasil menjadi narasi bermakna:
   "ringkasan": "Kamu memiliki kepribadian investigatif yang kuat...",
   "kekuatan": ["Kemampuan logika menonjol", "Minat sains tinggi"],
   "alasan_kecocokan": "Teknik Informatika cocok karena...",
-  "saran_pengembangan": "Mulai bangun portofolio coding kamu..."
+  "saran_pengembangan": "Perkuat portofolio coding kamu..."
 }
 ```
 
 Gemini dipanggil secara async di thread terpisah sehingga tidak memblokir pengiriman hasil prediksi. Jika Gemini gagal, sistem otomatis menggunakan narasi fallback — aplikasi tetap berjalan normal.
+
+## Cara Kerja Training Model
+
+Kode training ada di folder `training/` dan dijalankan di Google Colab. Berikut alur lengkapnya:
+
+| Tahap | Proses |
+|-------|--------|
+| 1. Load Dataset | Upload file `riasec_ml_ready.csv` ke Colab |
+| 2. Eksplorasi | Visualisasi distribusi data, skor RIASEC, dan korelasi fitur |
+| 3. Preprocessing | Encoding label, scaling fitur (StandardScaler), penyeimbangan data (SMOTE) |
+| 4. Split Dataset | Train 70% / Validasi 15% / Test 15% dengan stratifikasi |
+| 5. Arsitektur Model | Dual-input Keras: cabang RIASEC (dengan `RIASECAttentionLayer`) + cabang Akademik, digabung lalu diklasifikasikan |
+| 6. Training | Custom training loop dengan ReduceLROnPlateau, EarlyStopping, dan AccuracyThreshold |
+| 7. Evaluasi | Classification report, confusion matrix, top-3 accuracy, sharpened MAE |
+| 8. Simpan Artefak | Model `.keras`, scaler `.pkl`, encoder `.pkl`, mapping JSON |
+| 9. Download | Semua artefak di-zip dan diunduh untuk digunakan di backend |
+
+Hasil training (folder `model_artifacts/`) langsung dipakai oleh `app.py` saat melayani request.
 
 ## Tech Stack
 
@@ -81,6 +103,7 @@ Gemini dipanggil secara async di thread terpisah sehingga tidak memblokir pengir
 | Feature Engineering | scikit-learn 1.6, NumPy |
 | Generative AI | Gemini (OpenAI-compatible client) |
 | Containerisasi | Docker (python:3.12-slim) |
+| Training Environment | Google Colab |
 
 ## Memulai
 
@@ -92,8 +115,8 @@ Gemini dipanggil secara async di thread terpisah sehingga tidak memblokir pengir
 ### Instalasi
 
 ```bash
-git clone https://github.com/KompasKarir/KompasKarir-API.git
-cd KompasKarir-API
+git clone https://github.com/KompasKarir/KompasKarir-ai.git
+cd KompasKarir-ai
 python -m venv venv
 
 # Windows
@@ -139,6 +162,14 @@ docker run -p 7860:7860 \
   -e GEMINI_API_KEY=key-gemini-kamu \
   kompaskarir-ai
 ```
+
+## Melatih Ulang Model
+
+1. Buka notebook di folder `training/` menggunakan Google Colab
+2. Upload file dataset `riasec_ml_ready.csv` saat diminta
+3. Jalankan semua cell secara berurutan
+4. Di akhir notebook, file `model_artifacts.zip` akan otomatis terunduh
+5. Ekstrak ZIP dan letakkan folder `model_artifacts/` di root project ini
 
 ## API Endpoint
 
@@ -237,23 +268,25 @@ data: [DONE]
 ## Struktur Project
 
 ```
-KompasKarir-API/
-├── app.py                      # Aplikasi utama FastAPI
-├── requirements.txt            # Dependensi Python
-├── Dockerfile                  # Konfigurasi Docker
+KompasKarir-ai/
+├── app.py                        # Aplikasi utama FastAPI
+├── requirements.txt              # Dependensi Python
+├── Dockerfile                    # Konfigurasi Docker
 ├── .gitignore
-├── .gitattributes              # Konfigurasi Git LFS
+├── .gitattributes                # Konfigurasi Git LFS
 ├── README.md
-└── model_artifacts/
-    ├── model_riasec.keras      # Model Keras (TensorFlow)
-    ├── label_encoder.pkl       # Encoder nama rumpun ilmu
-    ├── scaler_riasec.pkl       # Normalisasi input RIASEC
-    ├── scaler_akademik.pkl     # Normalisasi input akademik
-    ├── model_info.json         # Metadata model
-    ├── rumpun_list.json        # Daftar rumpun ilmu
-    ├── rumpun_to_prodi.json    # Mapping rumpun ke program studi
-    ├── prodi_riasec_mean.json  # Profil rata-rata RIASEC per prodi
-    └── prodi_akademik_mean.json
+├── training/                     # Kode training model (Google Colab)
+│   └── training_riasec.ipynb    # Notebook training lengkap
+└── model_artifacts/              # File model hasil training
+    ├── model_riasec.keras        # Model Keras (TensorFlow)
+    ├── label_encoder.pkl         # Encoder nama rumpun ilmu
+    ├── scaler_riasec.pkl         # Normalisasi input RIASEC
+    ├── scaler_akademik.pkl       # Normalisasi input akademik
+    ├── model_info.json           # Metadata model (akurasi, versi)
+    ├── rumpun_list.json          # Daftar rumpun ilmu
+    ├── rumpun_to_prodi.json      # Mapping rumpun ke program studi
+    ├── prodi_riasec_mean.json    # Profil rata-rata RIASEC per prodi
+    └── prodi_akademik_mean.json  # Profil rata-rata akademik per prodi
 ```
 
 ## Troubleshooting
@@ -284,9 +317,12 @@ Proyek ini dikembangkan sebagai bagian dari program Coding Camp 2026 (Dicoding �
 
 ## Links
 
-| Service | URL |
-|---------|-----|
-| Frontend (Vercel) | [kompaskarir.vercel.app](https://kompaskarir.vercel.app) |
-| Backend (Huggingface) | [SirGhazian/kompaskarir-backend](https://huggingface.co/spaces/SirGhazian/kompaskarir-backend) |
-| AI Model (Huggingface) | [RidhoHamdani/kompaskarir-ai](https://huggingface.co/spaces/RidhoHamdani/kompaskarir-ai) |
-| GitHub | [KompasKarir/KompasKarir-API](https://github.com/KompasKarir/KompasKarir-API) |
+| Deployment | URL |
+|------------|-----|
+| Deployment Frontend (Vercel) | [kompaskarir.vercel.app](https://kompaskarir.vercel.app) |
+| Deployment Backend (Hugging Face) | [SirGhazian/kompaskarir-backend](https://huggingface.co/spaces/SirGhazian/kompaskarir-backend) |
+| Deployment AI Model (Hugging Face) | [RidhoHamdani/kompaskarir-ai](https://huggingface.co/spaces/RidhoHamdani/kompaskarir-ai) |
+
+| All Source Code | URL |
+|-----------------|-----|
+| Main GitHub Organization | [KompasKarir](https://github.com/KompasKarir) |
