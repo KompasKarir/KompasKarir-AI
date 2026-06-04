@@ -115,8 +115,8 @@ Hasil training (folder `model_artifacts/`) langsung dipakai oleh `app.py` saat m
 ### Instalasi
 
 ```bash
-git clone https://github.com/KompasKarir/KompasKarir-ai.git
-cd KompasKarir-ai
+git clone https://github.com/KompasKarir/KompasKarir-AI.git
+cd KompasKarir-AI
 python -m venv venv
 
 # Windows
