@@ -13,6 +13,7 @@ Backend API sistem rekomendasi program studi berbasis kepribadian RIASEC dengan 
 KompasKarir AI adalah backend berbasis FastAPI yang menjadi otak dari sistem rekomendasi program studi. API ini menerima profil RIASEC dan nilai akademik pengguna, kemudian menganalisisnya menggunakan model Machine Learning (TensorFlow) untuk memprediksi rumpun ilmu yang cocok dan merekomendasikan program studi spesifik. Hasilnya diperkaya dengan narasi personal dalam Bahasa Indonesia yang dihasilkan oleh Gemini AI.
 
 Repo ini terdiri dari dua bagian utama:
+
 - `training/` — notebook Google Colab untuk melatih model Machine Learning
 - `app.py` — backend FastAPI yang melayani hasil prediksi model ke frontend
 
@@ -58,12 +59,14 @@ Dokumentasi interaktif tersedia di `/docs` (Swagger UI) setelah server berjalan 
 Gemini AI digunakan untuk mengubah data prediksi yang berupa angka dan label menjadi narasi yang personal dan mudah dipahami siswa.
 
 Tanpa Gemini, hasil hanya berupa:
+
 ```
 Rumpun: Sains & Teknologi (78.4%)
 Prodi: Teknik Informatika (48.2%)
 ```
 
 Dengan Gemini, hasil menjadi narasi bermakna:
+
 ```json
 {
   "ringkasan": "Kamu memiliki kepribadian investigatif yang kuat...",
@@ -79,31 +82,31 @@ Gemini dipanggil secara async di thread terpisah sehingga tidak memblokir pengir
 
 Kode training ada di folder `training/` dan dijalankan di Google Colab. Berikut alur lengkapnya:
 
-| Tahap | Proses |
-|-------|--------|
-| 1. Load Dataset | Upload file `riasec_ml_ready.csv` ke Colab |
-| 2. Eksplorasi | Visualisasi distribusi data, skor RIASEC, dan korelasi fitur |
-| 3. Preprocessing | Encoding label, scaling fitur (StandardScaler), penyeimbangan data (SMOTE) |
-| 4. Split Dataset | Train 70% / Validasi 15% / Test 15% dengan stratifikasi |
+| Tahap               | Proses                                                                                                            |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| 1. Load Dataset     | Upload file `riasec_ml_ready.csv` ke Colab                                                                        |
+| 2. Eksplorasi       | Visualisasi distribusi data, skor RIASEC, dan korelasi fitur                                                      |
+| 3. Preprocessing    | Encoding label, scaling fitur (StandardScaler), penyeimbangan data (SMOTE)                                        |
+| 4. Split Dataset    | Train 70% / Validasi 15% / Test 15% dengan stratifikasi                                                           |
 | 5. Arsitektur Model | Dual-input Keras: cabang RIASEC (dengan `RIASECAttentionLayer`) + cabang Akademik, digabung lalu diklasifikasikan |
-| 6. Training | Custom training loop dengan ReduceLROnPlateau, EarlyStopping, dan AccuracyThreshold |
-| 7. Evaluasi | Classification report, confusion matrix, top-3 accuracy, sharpened MAE |
-| 8. Simpan Artefak | Model `.keras`, scaler `.pkl`, encoder `.pkl`, mapping JSON |
-| 9. Download | Semua artefak di-zip dan diunduh untuk digunakan di backend |
+| 6. Training         | Custom training loop dengan ReduceLROnPlateau, EarlyStopping, dan AccuracyThreshold                               |
+| 7. Evaluasi         | Classification report, confusion matrix, top-3 accuracy, sharpened MAE                                            |
+| 8. Simpan Artefak   | Model `.keras`, scaler `.pkl`, encoder `.pkl`, mapping JSON                                                       |
+| 9. Download         | Semua artefak di-zip dan diunduh untuk digunakan di backend                                                       |
 
 Hasil training (folder `model_artifacts/`) langsung dipakai oleh `app.py` saat melayani request.
 
 ## Tech Stack
 
-| Komponen | Teknologi |
-|----------|-----------|
-| Web Framework | FastAPI 0.115, Uvicorn |
-| Validasi Input | Pydantic v2, pydantic-settings |
-| Machine Learning | TensorFlow 2.20, Keras 3.13 |
-| Feature Engineering | scikit-learn 1.6, NumPy |
-| Generative AI | Gemini (OpenAI-compatible client) |
-| Containerisasi | Docker (python:3.12-slim) |
-| Training Environment | Google Colab |
+| Komponen             | Teknologi                         |
+| -------------------- | --------------------------------- |
+| Web Framework        | FastAPI 0.115, Uvicorn            |
+| Validasi Input       | Pydantic v2, pydantic-settings    |
+| Machine Learning     | TensorFlow 2.20, Keras 3.13       |
+| Feature Engineering  | scikit-learn 1.6, NumPy           |
+| Generative AI        | Gemini (OpenAI-compatible client) |
+| Containerisasi       | Docker (python:3.12-slim)         |
+| Training Environment | Google Colab                      |
 
 ## Memulai
 
@@ -165,6 +168,9 @@ docker run -p 7860:7860 \
 
 ## Melatih Ulang Model
 
+> **Download model artifacts:** [Google Drive](https://drive.google.com/drive/folders/1gzyu7shSc-V4MWJGdZzPXDXUuJA_v6wr?usp=sharing)
+> — Ekstrak dan letakkan folder `model_artifacts/` di root project untuk langsung menjalankan backend tanpa perlu training ulang.
+
 1. Buka notebook di folder `training/` menggunakan Google Colab
 2. Upload file dataset `riasec_ml_ready.csv` saat diminta
 3. Jalankan semua cell secara berurutan
@@ -190,12 +196,14 @@ Informasi dasar API beserta daftar endpoint yang tersedia.
 Endpoint utama — menerima profil RIASEC dan nilai akademik, mengembalikan prediksi rumpun ilmu, rekomendasi program studi, dan narasi personal Gemini AI via SSE streaming.
 
 **Header:**
+
 ```
 X-Internal-API-Key: <INTERNAL_API_KEY>
 Content-Type: application/json
 ```
 
 **Request Body:**
+
 ```json
 {
   "riasec": {
@@ -217,11 +225,11 @@ Content-Type: application/json
 }
 ```
 
-| Field | Tipe | Validasi | Keterangan |
-|-------|------|----------|------------|
-| `riasec.r/i/a/s/e/c` | float | 0 – 100 | Skor tiap dimensi kepribadian RIASEC |
-| `akademik.logika/bahasa/sains/sosial/praktik` | float | 0 – 100 | Skor kemampuan akademik per bidang |
-| `top_k` | int | 1 – 10 | Jumlah rumpun yang ditampilkan (default: 3) |
+| Field                                         | Tipe  | Validasi | Keterangan                                  |
+| --------------------------------------------- | ----- | -------- | ------------------------------------------- |
+| `riasec.r/i/a/s/e/c`                          | float | 0 – 100  | Skor tiap dimensi kepribadian RIASEC        |
+| `akademik.logika/bahasa/sains/sosial/praktik` | float | 0 – 100  | Skor kemampuan akademik per bidang          |
+| `top_k`                                       | int   | 1 – 10   | Jumlah rumpun yang ditampilkan (default: 3) |
 
 **Response — SSE Stream (3 event berurutan):**
 
@@ -258,11 +266,11 @@ data: [DONE]
 
 **Status Code:**
 
-| Kode | Kondisi |
-|------|---------|
-| `200` | Berhasil, SSE stream dimulai |
-| `401` | API key tidak ada atau salah |
-| `422` | Input tidak valid |
+| Kode  | Kondisi                                        |
+| ----- | ---------------------------------------------- |
+| `200` | Berhasil, SSE stream dimulai                   |
+| `401` | API key tidak ada atau salah                   |
+| `422` | Input tidak valid                              |
 | `503` | INTERNAL_API_KEY belum dikonfigurasi di server |
 
 ## Struktur Project
@@ -291,25 +299,25 @@ KompasKarir-ai/
 
 ## Troubleshooting
 
-| Error | Solusi |
-|-------|--------|
-| `401 Unauthorized` | Pastikan header `X-Internal-API-Key` terisi dengan nilai yang benar |
-| `503 Service Unavailable` | `INTERNAL_API_KEY` kosong — tambahkan ke `.env` atau Secrets HF |
-| Model tidak ditemukan | Pastikan folder `model_artifacts/` ada dan semua file lengkap |
-| Narasi Gemini gagal | Cek `GEMINI_API_KEY` — fallback narasi otomatis akan aktif |
-| Push GitHub ditolak | Setup Git LFS: `git lfs track '*.keras' '*.pkl'` |
-| CORS error | Tambahkan domain frontend ke `ALLOWED_ORIGINS` di `.env` |
+| Error                     | Solusi                                                              |
+| ------------------------- | ------------------------------------------------------------------- |
+| `401 Unauthorized`        | Pastikan header `X-Internal-API-Key` terisi dengan nilai yang benar |
+| `503 Service Unavailable` | `INTERNAL_API_KEY` kosong — tambahkan ke `.env` atau Secrets HF     |
+| Model tidak ditemukan     | Pastikan folder `model_artifacts/` ada dan semua file lengkap       |
+| Narasi Gemini gagal       | Cek `GEMINI_API_KEY` — fallback narasi otomatis akan aktif          |
+| Push GitHub ditolak       | Setup Git LFS: `git lfs track '*.keras' '*.pkl'`                    |
+| CORS error                | Tambahkan domain frontend ke `ALLOWED_ORIGINS` di `.env`            |
 
 ## Tim Pengembang
 
-| ID | Nama | Peran |
-|----|------|-------|
-| CDCC282D6Y1250 | Carli Tamba | Data Scientist |
-| CDCC012D6Y1245 | Muhammad Firman Ardiansyah | Data Scientist |
+| ID             | Nama                                  | Peran                    |
+| -------------- | ------------------------------------- | ------------------------ |
+| CDCC282D6Y1250 | Carli Tamba                           | Data Scientist           |
+| CDCC012D6Y1245 | Muhammad Firman Ardiansyah            | Data Scientist           |
 | CFCC282D6Y0786 | Muhammad Ghazian Tsaqif Zhafiri Andoz | Full-Stack Web Developer |
-| CFCC955D6Y1821 | Dhimas Setyo Wahyu Santoso | Full-Stack Web Developer |
-| CACC282D6Y0961 | Ridho Hamdani Putra | AI Engineer |
-| CACC282D6X0960 | Setya Carina Rianti | AI Engineer |
+| CFCC955D6Y1821 | Dhimas Setyo Wahyu Santoso            | Full-Stack Web Developer |
+| CACC282D6Y0961 | Ridho Hamdani Putra                   | AI Engineer              |
+| CACC282D6X0960 | Setya Carina Rianti                   | AI Engineer              |
 
 ## Lisensi
 
@@ -317,12 +325,13 @@ Proyek ini dikembangkan sebagai bagian dari program Coding Camp 2026 (Dicoding �
 
 ## Links
 
-| Deployment | URL |
-|------------|-----|
-| Deployment Frontend (Vercel) | [kompaskarir.vercel.app](https://kompaskarir.vercel.app) |
-| Deployment Backend (Hugging Face) | [SirGhazian/kompaskarir-backend](https://huggingface.co/spaces/SirGhazian/kompaskarir-backend) |
-| Deployment AI Model (Hugging Face) | [RidhoHamdani/kompaskarir-ai](https://huggingface.co/spaces/RidhoHamdani/kompaskarir-ai) |
+| Deployment                         | URL                                                                                                     |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Deployment Frontend (Vercel)       | [kompaskarir.vercel.app](https://kompaskarir.vercel.app)                                                |
+| Deployment Backend (Hugging Face)  | [SirGhazian/kompaskarir-backend](https://huggingface.co/spaces/SirGhazian/kompaskarir-backend)          |
+| Deployment AI Model (Hugging Face) | [RidhoHamdani/kompaskarir-ai](https://huggingface.co/spaces/RidhoHamdani/kompaskarir-ai)                |
+| Model Artifacts (Google Drive)     | [model_artifacts](https://drive.google.com/drive/folders/1gzyu7shSc-V4MWJGdZzPXDXUuJA_v6wr?usp=sharing) |
 
-| All Source Code | URL |
-|-----------------|-----|
+| All Source Code          | URL                                           |
+| ------------------------ | --------------------------------------------- |
 | Main GitHub Organization | [KompasKarir](https://github.com/KompasKarir) |
